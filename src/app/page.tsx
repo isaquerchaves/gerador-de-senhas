@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import Input from './components/input';
 
 export default function Home() {
   const [password, setPassword] = useState("");
@@ -9,12 +10,12 @@ export default function Home() {
 
   function generate() {
     const characters = "'1234567890-=!@#$%¨&*()_+qwertyuiop[asdfghjklç~]zxcvbnm,.;/QWERTYUIOP{ASDFGHJKLÇ^}ZXCVBNM<>:?"
-    let newPassord = ''
+    let newPassword = ''
     for (let i = 0; i < passwordSize; i++) {
       const position = Math.floor(Math.random() * characters.length)
-      newPassord += characters[position]
+      newPassword += characters[position]
     }
-    setPassword(newPassord)
+    setPassword(newPassword)
     setCopyText("Copiar")
   }
 
@@ -28,14 +29,9 @@ export default function Home() {
       <h1 className="text-5xl">Gerador de senhas</h1>
       <div>
         <label htmlFor="passwordSize">Tamanho:</label>
-        <input 
-          type="number" 
-          id="passwordSize" 
-          className=' ml-3 rounded-lg p-2 border border-transparent bg-zinc-800 hover:border-purple-500' 
-          min={1}
-          value={passwordSize}
-          onChange={(ev) => setPasswordSize(ev.target.value)}
-          />
+        <Input 
+          passwordSize={passwordSize} 
+          setPasswordSize={setPasswordSize}/>
       </div>
       <div className="flex flex-row gap-8">
         <button onClick={generate} className="rounded-lg p-2 border border-transparent bg-zinc-800 hover:border-purple-500">Gerar senha de {passwordSize} caracteres</button>
